@@ -13,6 +13,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   console.log('transcript text:', transcriptText);
+  console.log('env vars: ', process.env.ASSEMBLYAI_API_URL);
 
   return (
     <>
@@ -45,7 +46,7 @@ function App() {
           </>
         ) : null}
         <Audio
-          apiKey={process.env.ASSEMBLYAI_API_URL || ASSEMBLY_API_KEY}
+          apiKey={process.env.ASSEMBLYAI_API_URL}
           setTranscriptText={setTranscriptText}
           setIsLoading={setIsLoading}
         />

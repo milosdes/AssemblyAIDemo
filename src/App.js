@@ -7,7 +7,7 @@ import { menu2 as options } from './menu';
 import ReactLoading from 'react-loading';
 
 function App() {
-  const ASSEMBLY_API_KEY = 'YOUR_KEY_GOES_HERE';
+  const ASSEMBLYAI_API_KEY = 'f9da26145e824c72bb62de98b26de5cd';
   const [transcriptText, setTranscriptText] = useState('');
   const [selection, setSelection] = useState(options.options[0]);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +46,7 @@ function App() {
           </>
         ) : null}
         <Audio
-          apiKey={process.env.ASSEMBLYAI_API_URL}
+          apiKey={process.env.ASSEMBLYAI_API_URL || ASSEMBLYAI_API_KEY}
           setTranscriptText={setTranscriptText}
           setIsLoading={setIsLoading}
         />

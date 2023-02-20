@@ -27,7 +27,7 @@ function App() {
             show={transcriptText.length > 0 ? false : true}
           />
         ) : (
-          <div className="bg-primary-500 w-20 h-10 inline-flex p-3 m-auto justify-center -align-enter rounded-md">
+          <div className="bg-primary-500 w-30 h-20 inline-flex p-3 m-auto justify-center -align-enter rounded-md">
             <ReactLoading type={'spin'} color={'white'} />
           </div>
         )}

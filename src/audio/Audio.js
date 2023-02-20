@@ -3,10 +3,9 @@ import { useReactMediaRecorder } from 'react-media-recorder';
 import { micIcon } from '../icons';
 import { assemblyApi } from '../api/assemblyApi';
 
-export default function Audio({ apiKey, setTranscriptText }) {
+export default function Audio({ apiKey, setTranscriptText, setIsLoading }) {
   //state
   const [isRecording, setIsRecording] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   //api setup and functions
   const api = assemblyApi(apiKey);
@@ -44,6 +43,7 @@ export default function Audio({ apiKey, setTranscriptText }) {
   //handlers
   const onStopClicked = async (blobUrl, blobData) => {
     console.log('stop clicked', blobData);
+    setIsLoading(true);
     const response = await uploadAudioFile(blobData);
     console.log(response.data.upload_url);
     const transcript = await transcribeAudioFile(response.data.upload_url);
@@ -67,12 +67,11 @@ export default function Audio({ apiKey, setTranscriptText }) {
   };
 
   //style
-  let micContainerColor = isRecording ? 'bg-red-700' : 'bg-green-700';
+  let micContainerColor = isRecording ? 'bg-red-700' : 'bg-primary-900';
   let micContainerStyle = `p-1 w-min h-auto m-auto rounded-md hover:cursor-pointer hover:opacity-80 ${micContainerColor} hover:`;
 
   return (
     <div>
-      <p>{status}</p>
       <div className={`${micContainerStyle} `} onClick={onMicClick}>
         {micIcon}
       </div>

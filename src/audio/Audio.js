@@ -4,10 +4,10 @@ import { micIcon } from '../icons';
 import { assemblyApi } from '../api/assemblyApi';
 
 export default function Audio({ apiKey, setTranscriptText, setIsLoading }) {
-  //state
+  //State
   const [isRecording, setIsRecording] = useState(false);
 
-  //api setup and functions
+  //Api setup and functions
   const api = assemblyApi(apiKey);
   const uploadAudioFile = async (data) => {
     return await api.post('/upload', data);
@@ -20,16 +20,19 @@ export default function Audio({ apiKey, setTranscriptText, setIsLoading }) {
   const getTranscriptText = (id) => {
     const checkIfComplete = async (id) => {
       let isComplete = await api.get(`/transcript/${id}`);
+      //Not complete yet
       if (
         isComplete.data.status === 'queued' ||
         isComplete.data.status === 'processing'
       ) {
         console.log('Transcription not complete yet...');
       }
+      //Error
       if (isComplete.data.status === 'error') {
         console.log('There was an error transcribing your audio file');
         setIsLoading(false);
       }
+      //Completed
       if (isComplete.data.status === 'completed') {
         if (typeof intervalObj !== 'undefined') clearInterval(intervalObj);
         console.log(`Transcription complete!\nText: \n${isComplete.data.text}`);
@@ -40,7 +43,7 @@ export default function Audio({ apiKey, setTranscriptText, setIsLoading }) {
     const intervalObj = setInterval(checkIfComplete, 2000, id);
   };
 
-  //handlers
+  //Handlers
   const onStopClicked = async (blobUrl, blobData) => {
     console.log('stop clicked', blobData);
     setIsLoading(true);
@@ -66,7 +69,7 @@ export default function Audio({ apiKey, setTranscriptText, setIsLoading }) {
     });
   };
 
-  //style
+  //Style
   let micContainerColor = isRecording ? 'bg-red-700' : 'bg-primary-900';
   let micContainerStyle = `p-1 w-min h-auto m-auto rounded-md hover:cursor-pointer hover:opacity-80 ${micContainerColor} hover:`;
 

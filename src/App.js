@@ -8,7 +8,7 @@ import ReactLoading from 'react-loading';
 
 function App() {
   const ASSEMBLY_API_KEY = 'YOUR_KEY_GOES_HERE';
-  const [transcriptText, setTranscriptText] = useState('a');
+  const [transcriptText, setTranscriptText] = useState('');
   const [selection, setSelection] = useState(options.options[0]);
   const [isLoading, setIsLoading] = useState(false);
 

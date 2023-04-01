@@ -45,10 +45,8 @@ export default function Audio({ apiKey, setTranscriptText, setIsLoading }) {
 
   //Handlers
   const onStopClicked = async (blobUrl, blobData) => {
-    console.log('stop clicked', blobData);
     setIsLoading(true);
     const response = await uploadAudioFile(blobData);
-    console.log(response.data.upload_url);
     const transcript = await transcribeAudioFile(response.data.upload_url);
     const results = await getTranscriptText(transcript.data.id);
   };

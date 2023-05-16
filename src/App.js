@@ -6,24 +6,10 @@ import { menu as options } from './mocks/menu';
 import ReactLoading from 'react-loading';
 
 function App() {
-  const ASSEMBLYAI_API_KEY = 'f9da26145e824c72bb62de98b26de5cd';
-
   //State
   const [transcriptText, setTranscriptText] = useState('');
   const [selection, setSelection] = useState(options.options[0]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const poweredByLink = (
-    <div className="w-30 text-[10px] overflow-hidden whitespace-nowrap">
-      <a className="inline-flex" href="https://www.assemblyai.com/">
-        <span className="pr-2">Powered by </span>
-        <img
-          className="w-16"
-          src="https://www.assemblyai.com/_next/static/media/default.9b5386f1.svg"
-        ></img>
-      </a>
-    </div>
-  );
 
   //Styles
   const reactLoadingContainer =
@@ -32,8 +18,6 @@ function App() {
   const appContainer = 'flex flex-col justify-center align-center m-auto';
   const orderAgainButton =
     'p-2 mb-2 m-auto rounded text-gray-500 bg-gray-200 font-semibold text-xs md:text-sm w-max active:bg-gray-300 transition duration-300 ease max-h-[10vh]';
-  const poweredByContainer =
-    'pt-10 m-auto inline-flex justify-center align-center';
 
   return (
     <>
@@ -67,11 +51,10 @@ function App() {
         ) : null}
 
         <Audio
-          apiKey={process.env.ASSEMBLYAI_API_URL || ASSEMBLYAI_API_KEY}
+          apiKey={process.env.ASSEMBLYAI_API_KEY}
           setTranscriptText={setTranscriptText}
           setIsLoading={setIsLoading}
         />
-        <div className={poweredByContainer}>{poweredByLink}</div>
       </div>
     </>
   );

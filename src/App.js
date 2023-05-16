@@ -19,6 +19,7 @@ function App() {
   const orderAgainButton =
     'p-2 mb-2 m-auto rounded text-gray-500 bg-gray-200 font-semibold text-xs md:text-sm w-max active:bg-gray-300 transition duration-300 ease max-h-[10vh]';
 
+    console.log(process.env.REACT_APP_ASSEMBLY_API_KEY)
   return (
     <>
       <div className={appContainer}>
@@ -51,7 +52,7 @@ function App() {
         ) : null}
 
         <Audio
-          apiKey={process.env.ASSEMBLYAI_API_KEY}
+          apiKey={process.env.REACT_APP_ASSEMBLY_API_KEY}
           setTranscriptText={setTranscriptText}
           setIsLoading={setIsLoading}
         />
